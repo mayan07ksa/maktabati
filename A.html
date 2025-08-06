@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>إرسال عرض للتبرع</title>
+  <title>طلب الحصول على الدم</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -61,7 +61,7 @@
       color: #333;
     }
 
-    select {
+    input, select {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -69,8 +69,8 @@
       font-size: 15px;
     }
 
-    .submit-btn {
-      background-color: #165016;
+    button {
+      background-color: #1b4d1b;
       color: white;
       border: none;
       padding: 10px 30px;
@@ -79,11 +79,11 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       display: block;
-      margin: 20px auto;
+      margin: 20px auto 0;
     }
 
-    .submit-btn:hover {
-      background-color: #0d3d0d;
+    button:hover {
+      background-color: #165f16;
     }
   </style>
 </head>
@@ -105,20 +105,14 @@
 
   <!-- النموذج -->
   <div class="form-container">
-    <h2>إرسال عرض للتبرع بالدم</h2>
+    <h2>طلب الحصول على الدم</h2>
+    <form>
+      <label for="hospital">اسم المستشفى:</label>
+      <input type="text" id="hospital" placeholder="مثال: مستشفى الملك فهد">
 
-    <form action="login.html" method="get">
-      <label for="center">مركز التبرع:</label>
-      <select id="center" name="center">
-        <option>اختر مركز التبرع</option>
-        <option>مركز الدم بالرياض</option>
-        <option>مستشفى الملك فهد</option>
-        <option>مركز الدم بجدة</option>
-      </select>
-
-      <label for="blood">فصيلة الدم:</label>
-      <select id="blood" name="blood">
-        <option>اختر فصيلة الدم</option>
+      <label for="blood">فصيلة الدم المطلوبة:</label>
+      <select id="blood">
+        <option>اختر الفصيلة</option>
         <option>A+</option>
         <option>A-</option>
         <option>B+</option>
@@ -129,7 +123,10 @@
         <option>AB-</option>
       </select>
 
-      <input type="submit" class="submit-btn" value="إرسال">
+      <label for="amount">الكمية المطلوبة (بالوحدات):</label>
+      <input type="number" id="amount" placeholder="مثال: 3">
+
+      <button type="button" onclick="location.href='N.html'">إرسال الطلب</button>
     </form>
   </div>
 

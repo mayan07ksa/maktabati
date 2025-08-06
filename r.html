@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>إرسال عرض للتبرع</title>
+  <title>إنشاء تقرير</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -10,7 +10,6 @@
       margin: 0;
       padding: 0;
     }
-
     header {
       background-color: #1b4d1b;
       color: white;
@@ -19,26 +18,21 @@
       align-items: center;
       padding: 12px 30px;
     }
-
     header .right a {
       color: white;
       margin-left: 20px;
       text-decoration: none;
     }
-
     header .left {
       font-weight: bold;
     }
-
     .logo-container {
       text-align: center;
       margin: 25px 0;
     }
-
     .logo-container img {
       width: 110px;
     }
-
     .form-container {
       background-color: white;
       width: 420px;
@@ -47,49 +41,42 @@
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-
     .form-container h2 {
       text-align: center;
       color: #1b4d1b;
       margin-bottom: 20px;
     }
-
     label {
       display: block;
       margin: 15px 0 5px;
       font-weight: bold;
       color: #333;
     }
-
-    select {
+    input, textarea {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 15px;
     }
-
-    .submit-btn {
-      background-color: #165016;
+    button {
+      margin-top: 20px;
+      background-color: #1b4d1b;
       color: white;
       border: none;
-      padding: 10px 30px;
-      font-size: 16px;
+      padding: 10px;
+      width: 100%;
       border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: block;
-      margin: 20px auto;
     }
-
-    .submit-btn:hover {
-      background-color: #0d3d0d;
+    button:hover {
+      background-color: #165f16;
     }
   </style>
 </head>
 <body>
 
-  <!-- الهيدر -->
   <header>
     <div class="left">بنك الدم</div>
     <div class="right">
@@ -98,40 +85,36 @@
     </div>
   </header>
 
-  <!-- الشعار -->
   <div class="logo-container">
     <img src="g6.jpg" alt="شعار بنك الدم">
   </div>
 
-  <!-- النموذج -->
   <div class="form-container">
-    <h2>إرسال عرض للتبرع بالدم</h2>
+    <h2>إنشاء تقرير</h2>
+    <label for="name">اسم المتبرع:</label>
+    <input type="text" id="name" placeholder="ادخل اسم المتبرع">
 
-    <form action="login.html" method="get">
-      <label for="center">مركز التبرع:</label>
-      <select id="center" name="center">
-        <option>اختر مركز التبرع</option>
-        <option>مركز الدم بالرياض</option>
-        <option>مستشفى الملك فهد</option>
-        <option>مركز الدم بجدة</option>
-      </select>
+    <label for="center">مركز التبرع:</label>
+    <input type="text" id="center" placeholder="ادخل اسم المركز">
 
-      <label for="blood">فصيلة الدم:</label>
-      <select id="blood" name="blood">
-        <option>اختر فصيلة الدم</option>
-        <option>A+</option>
-        <option>A-</option>
-        <option>B+</option>
-        <option>B-</option>
-        <option>O+</option>
-        <option>O-</option>
-        <option>AB+</option>
-        <option>AB-</option>
-      </select>
+    <label for="date">تاريخ التبرع:</label>
+    <input type="date" id="date">
 
-      <input type="submit" class="submit-btn" value="إرسال">
-    </form>
+    <label for="notes">ملاحظات:</label>
+    <textarea id="notes" rows="4" placeholder="ادخل أي ملاحظات إضافية"></textarea>
+
+    <button onclick="saveReport()">إنشاء التقرير</button>
   </div>
+
+  <script>
+    function saveReport() {
+      localStorage.setItem("name", document.getElementById("name").value);
+      localStorage.setItem("center", document.getElementById("center").value);
+      localStorage.setItem("date", document.getElementById("date").value);
+      localStorage.setItem("notes", document.getElementById("notes").value);
+      window.location.href = "e.html";
+    }
+  </script>
 
 </body>
 </html>

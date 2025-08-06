@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض التقرير</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1b4d1b;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+    }
+    header .right a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+    header .left {
+      font-weight: bold;
+    }
+    .logo-container {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .logo-container img {
+      width: 110px;
+    }
+    .report-container {
+      background-color: white;
+      width: 420px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .report-container h2 {
+      text-align: center;
+      color: #1b4d1b;
+      margin-bottom: 20px;
+    }
+    .report-container p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    strong {
+      color: #1b4d1b;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="left">بنك الدم</div>
+    <div class="right">
+      <a href="#">تسجيل دخول</a>
+      <a href="#">إنشاء حساب</a>
+    </div>
+  </header>
+
+  <div class="logo-container">
+    <img src="g6.jpg" alt="شعار بنك الدم">
+  </div>
+
+  <div class="report-container">
+    <h2>عرض التقرير</h2>
+    <p><strong>اسم المتبرع:</strong> <span id="name"></span></p>
+    <p><strong>مركز التبرع:</strong> <span id="center"></span></p>
+    <p><strong>تاريخ التبرع:</strong> <span id="date"></span></p>
+    <p><strong>ملاحظات:</strong> <span id="notes"></span></p>
+  </div>
+
+  <script>
+    document.getElementById("name").textContent = localStorage.getItem("name") || "غير متوفر";
+    document.getElementById("center").textContent = localStorage.getItem("center") || "غير متوفر";
+    document.getElementById("date").textContent = localStorage.getItem("date") || "غير متوفر";
+    document.getElementById("notes").textContent = localStorage.getItem("notes") || "لا توجد ملاحظات";
+  </script>
+
+</body>
+</html>
