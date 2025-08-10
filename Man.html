@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إنشاء حساب</title>
+  <style>
+    body{font-family:'Segoe UI',sans-serif;background:#f9f9f9;margin:0}
+    header{background:#1b4d1b;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 30px}
+    header .right a{color:#fff;margin-left:20px;text-decoration:none}
+    header .left{font-weight:bold}
+    .logo-container{text-align:center;margin:25px 0}
+    .logo-container img{width:110px}
+    .form-container{background:#fff;width:420px;max-width:92%;margin:auto;padding:30px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,.1)}
+    .form-container h2{text-align:center;color:#1b4d1b;margin-bottom:20px}
+    label{display:block;margin:14px 0 6px;font-weight:600;color:#333}
+    input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+    .btn{width:100%;margin-top:18px;background:#1b4d1b;color:#fff;border:none;padding:11px;border-radius:6px;font-size:16px;cursor:pointer;transition:.2s}
+    .btn:hover{background:#165f16}
+    .error{color:#b00020;margin-top:8px;display:none;font-size:14px}
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <div class="left">بنك الدم</div>
+    <div class="right">
+      <a href="index.html">تسجيل دخول</a>
+      <a href="Man.html">إنشاء حساب</a>
+    </div>
+  </header>
+
+  <!-- الشعار -->
+  <div class="logo-container">
+    <img src="g6.jpg" alt="شعار بنك الدم">
+  </div>
+
+  <!-- النموذج -->
+  <div class="form-container">
+    <h2>إنشاء حساب</h2>
+
+    <label for="name">الاسم الكامل</label>
+    <input id="name" type="text" placeholder="اكتب اسمك الكامل">
+
+    <label for="uid">رقم الهوية أو الجوال</label>
+    <input id="uid" type="text" placeholder="مثال: 1234567890 أو 05XXXXXXXX">
+
+    <label for="pass">كلمة المرور</label>
+    <input id="pass" type="password" placeholder="••••••••">
+
+    <label for="pass2">تأكيد كلمة المرور</label>
+    <input id="pass2" type="password" placeholder="أعد إدخال كلمة المرور">
+
+    <div id="err" class="error">تحقق من البيانات.</div>
+    <button class="btn" id="registerBtn">إنشاء الحساب</button>
+  </div>
+
+  <script>
+    // حفظ المستخدمين في localStorage كمصفوفة [{id, pass, name}]
+    function getUsers(){
+      try { return JSON.parse(localStorage.getItem('users')||'[]'); }
+      catch(e){ return []; }
+    }
+    function setUsers(arr){
+      localStorage.setItem('users', JSON.stringify(arr));
+    }
+
+    document.getElementById('registerBtn').addEventListener('click', function () {
+      const name = document.getElementById('name').value.trim();
+      const uid  = document.getElementById('uid').value.trim();
+      const p1   = document.getElementById('pass').value;
+      const p2   = document.getElementById('pass2').value;
+      const err  = document.getElementById('err');
+
+      // تحقق بسيط
+      if (!name  !uid  !p1 || !p2){
+        err.textContent = 'جميع الحقول مطلوبة.'; err.style.display = 'block'; return;
+      }
+      if (p1.length < 4){
+        err.textContent = 'كلمة المرور يجب ألا تقل عن 4 أحرف.'; err.style.display = 'block'; return;
+      }
+      if (p1 !== p2){
+        err.textContent = 'كلمتا المرور غير متطابقتين.'; err.style.display = 'block'; return;
+      }
+
+      // منع تكرار نفس الهوية/الجوال
+      const users = getUsers();
+      if (users.some(u => u.id === uid)){
+        err.textContent = 'هذا الحساب مسجّل مسبقًا.'; err.style.display = 'block'; return;
+      }
+
+      // الحفظ
+      users.push({ id: uid, pass: p1, name });
+      setUsers(users);
+
+      // نجاح → تحويل لصفحة تسجيل الدخول
+      alert('تم إنشاء الحساب بنجاح. يمكنك تسجيل الدخول الآن.');
+      window.location.href = 'index.html';
+    });
+  </script>
+
+</body>
+</html>
